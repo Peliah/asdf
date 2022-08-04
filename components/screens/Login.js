@@ -3,6 +3,7 @@ import React from 'react'
 import { useFonts } from 'expo-font';
 import { FontAwesome, Octicons } from '@expo/vector-icons';
 import * as Linking from 'expo-linking';
+import { Axios } from "axios";
 
 export default function Login() {
     const [email, setEmail] = React.useState('')
@@ -15,19 +16,27 @@ export default function Login() {
     if (!loaded) {
         return null;
     }
+        
     
     const handleContactAdmin = () => {
         Linking.openURL('mailto:c.fomekong@wise.com?subject=Unable access my mobile account')
     }
 
-    const submitForm = () => {
-        if(!email.email || !password.password){
+    const submitForm = async() => {
+        if(!email || !password){
             setMessage('Invalid username/password field')
             setTimeout(()=>{
                 setMessage('')
             }, 2000)
         }
+        // fetch('http://127.0.0.1:8000/')
+        // fetch('https://jsonplaceholder.typicode.com/posts')
+        // .then(response => response.json())
+        // .then(json => console.log(json))
+        // .catch(err => {console.log(err)})
 
+        k = await Axios.get('http://localhost:8000/')
+        print(k)
     }
   return (
     <View style={styles.container}>
@@ -36,7 +45,7 @@ export default function Login() {
             <Octicons name="person" size={20} color="#fff" />
             <TextInput
                 value={email}
-                onChangeText={(email) => setEmail({ email })}
+                onChangeText={(email) =>{setEmail(email)}}
                 placeholder={'Email'}
                 style={styles.input}
             />
@@ -45,7 +54,7 @@ export default function Login() {
             <Octicons name="shield-lock" size={20} color="white" />
             <TextInput
                 value={password}
-                onChangeText={(password) => setPassword({ password })}
+                onChangeText={(password) => {setPassword(password)}}
                 placeholder={'Password'}
                 secureTextEntry={true}
                 style={styles.input}
@@ -64,6 +73,8 @@ export default function Login() {
             <Text style={styles.loginIssueMainText} >Have an issue with your account?</Text>
             <TouchableOpacity onPress={handleContactAdmin}><Text style={[styles.loginIssueButton]}>Contact admin</Text></TouchableOpacity>
         </View>
+        
+
       </View>
   )
 }
