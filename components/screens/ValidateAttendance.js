@@ -1,9 +1,17 @@
 import { StyleSheet, Image, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useFonts } from 'expo-font';
+
+import { AuthContext } from '../lib/AuthContext';
 
 export default function ValidateAttendance() {
 
+    const [authData, setAuthData] = useContext(AuthContext)
+    const [user, setUser] = useState('')
+    useEffect(() => {
+      setUser(authData[0])
+    }, [])
+    
     const [loaded] = useFonts({
         Montserrat: require('../assets/fonts/static/Montserrat-Bold.ttf'),
         RalewayBold: require('../assets/fonts/Raleway-Bold.ttf'),
@@ -12,10 +20,12 @@ export default function ValidateAttendance() {
         return null;
     }
     const currentTime = new Date().toLocaleString()
+    
   return (
     <View style={styles.container}>
         <View style={styles.header}>
             <Text style={styles.title}>Welcome back</Text>
+            <Text style={styles.title}>{user.name}</Text>
             <View style={styles.iconWrapper}>
                 <Image style={{width: 100, height: 100}} source={require('../assets/img/hi.webp')} />
             </View>

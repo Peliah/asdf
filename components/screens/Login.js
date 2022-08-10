@@ -1,14 +1,20 @@
 import { StyleSheet, Image, Text, View, TextInput, Button, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useFonts } from 'expo-font';
 import { FontAwesome, Octicons } from '@expo/vector-icons';
 import * as Linking from 'expo-linking';
-import { Axios } from "axios";
+        import axios, { Axios } from "axios";
+import { useNavigation } from '@react-navigation/native';
 
-export default function Login() {
+
+import { AuthContext } from '../lib/AuthContext';
+
+export default function Login({ navigation }) {
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [message, setMessage] = React.useState('')
+    const [user, setUser] = useState(false)
+    const [authData, setAuthData] = useContext( AuthContext )
     const [loaded] = useFonts({
         Montserrat: require('../assets/fonts/Montserrat.ttf'),
         RalewayBold: require('../assets/fonts/Raleway-Bold.ttf'),
@@ -16,28 +22,73 @@ export default function Login() {
     if (!loaded) {
         return null;
     }
+    
+    
+    
+
+    const login = async (email, password) => {
+        // try {
+        // const response = await fetch('http://192.168.43.14:8000/', 
+        //     {
+        //         headers: {
+        //             Accept: 'application/json',
+        //             Authorization: 'http',
+        //             'Content-Type': 'application/json',
+        //         },
+        //     });
+        //     const data = await response.json();
+        //     console.log(data)
+        // }
+        // catch (err) {
+        // console.log(err)
+        // }
+
         
+            // axios POST request
+        const options = {
+            url: 'http://192.168.43.14:8000/users/authenticate',
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json;charset=UTF-8'
+            },
+            data: JSON.stringify({
+                name: email,
+                password: password
+            })
+        };
+    
+        axios(options)
+            .then(response => {
+            data = response.data
+            setUser(data)
+            setAuthData(data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+    }
+  
+    
+    
     
     const handleContactAdmin = () => {
         Linking.openURL('mailto:c.fomekong@wise.com?subject=Unable access my mobile account')
-    }
-
-    const submitForm = async() => {
+    }   
+        
+    const submitForm = async( email, password ) => {
         if(!email || !password){
             setMessage('Invalid username/password field')
             setTimeout(()=>{
                 setMessage('')
             }, 2000)
         }
-        // fetch('http://127.0.0.1:8000/')
-        // fetch('https://jsonplaceholder.typicode.com/posts')
-        // .then(response => response.json())
-        // .then(json => console.log(json))
-        // .catch(err => {console.log(err)})
 
-        k = await Axios.get('http://localhost:8000/')
-        print(k)
+        login(email, password)
     }
+
+
   return (
     <View style={styles.container}>
         <Image style={{width: 200, height: 200}} source={require('../assets/img/logo_jarvis.png')} />
@@ -64,17 +115,14 @@ export default function Login() {
             <Text style={styles.danger}>{message}</Text>
         </View>
         
-        
-        <TouchableOpacity style= {styles.login} onPress={submitForm}>
+        <TouchableOpacity style= {styles.login} onPress={() => {submitForm(email, password)}}>
             <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
         <View style={styles.loginIssueWrapper}>
             <Text style={styles.loginIssueMainText} >Have an issue with your account?</Text>
-            <TouchableOpacity onPress={handleContactAdmin}><Text style={[styles.loginIssueButton]}>Contact admin</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => setAuthData("New Value")}><Text style={[styles.loginIssueButton]}>Contact admin</Text></TouchableOpacity>
         </View>
-        
-
       </View>
   )
 }

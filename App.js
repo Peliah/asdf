@@ -1,22 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { StyleSheet,SafeAreaView, Text, Platform, } from 'react-native';
-import Login from './components/screens/Login';
-import PopupNetwork from './components/screens/PopupNetwork';
-import ValidateAttendance from './components/screens/ValidateAttendance';
+import { enableScreens } from 'react-native-screens'
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from 'react-native-screens/native-stack'
+// import {createStackNavigator} from '@react-navigation/stack';
 
 
+import { AuthContextProvider, AuthContext } from './components/lib/AuthContext';
+
+import PopupNetwork from './components/screens/PopupNetwork'
+import Auth from './components/screens/mainScreens/Auth';
+
+enableScreens();
 
 export default function App() {
   const [visible, setVisible] = useState(true)
-
+  const [connected, setconnected] = useState(true)
+  const Stack = createNativeStackNavigator()
+  
 
   return (
     <SafeAreaView style={styles.container}>
-      <Login />
-      {/* <PopupNetwork visible={visible} /> */}
-      {/* <ValidateAttendance /> */}
-      <StatusBar style="auto" />
+      <AuthContextProvider>
+        <NavigationContainer>
+          { connected ? <Auth /> : <PopupNetwork /> }
+        </NavigationContainer>
+      </AuthContextProvider>
     </SafeAreaView>
   );
 }
