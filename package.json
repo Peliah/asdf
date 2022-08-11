@@ -13,6 +13,7 @@
     "@expo-google-fonts/inter": "^0.2.2",
     "@expo/vector-icons": "^13.0.0",
     "@react-native-community/netinfo": "8.2.0",
+    "@react-native-community/slider": "^4.3.0",
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/native-stack": "^6.7.0",
     "@react-navigation/stack": "^6.2.2",

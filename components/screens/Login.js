@@ -53,7 +53,7 @@ export default function Login({ navigation }) {
             'Content-Type': 'application/json;charset=UTF-8'
             },
             data: JSON.stringify({
-                name: email,
+                email: email,
                 password: password
             })
         };
