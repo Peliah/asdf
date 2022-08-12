@@ -114,6 +114,7 @@ export default function Login({ navigation }) {
         <View style={{marginTop: -10}}>
             <Text style={styles.danger}>{message}</Text>
         </View>
+
         
         <TouchableOpacity style= {styles.login} onPress={() => {submitForm(email, password)}}>
             <Text style={styles.buttonText}>Login</Text>

@@ -12,7 +12,7 @@ export default function Auth() {
 
     return (
         <View style ={styles.container}>
-            { authData ? <AppStack />   : <AuthStack /> }
+            { !authData ? <AppStack />   : <AuthStack /> }
         </View>
   )
 }

@@ -4,7 +4,7 @@ import { StyleSheet,SafeAreaView, Text, Platform, } from 'react-native';
 import { enableScreens } from 'react-native-screens'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from 'react-native-screens/native-stack'
-// import {createStackNavigator} from '@react-navigation/stack';
+import 'react-native-gesture-handler';
 
 
 import { AuthContextProvider, AuthContext } from './components/lib/AuthContext';
