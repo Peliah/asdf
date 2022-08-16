@@ -27,26 +27,10 @@ export default function Login({ navigation }) {
     
 
     const login = async (email, password) => {
-        // try {
-        // const response = await fetch('http://192.168.43.14:8000/', 
-        //     {
-        //         headers: {
-        //             Accept: 'application/json',
-        //             Authorization: 'http',
-        //             'Content-Type': 'application/json',
-        //         },
-        //     });
-        //     const data = await response.json();
-        //     console.log(data)
-        // }
-        // catch (err) {
-        // console.log(err)
-        // }
-
         
             // axios POST request
         const options = {
-            url: 'http://192.168.43.14:8000/users/authenticate',
+            url: 'http://192.168.43.102:5000/users/authenticate',
             method: 'POST',
             headers: {
             'Accept': 'application/json',

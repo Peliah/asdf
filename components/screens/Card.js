@@ -1,37 +1,62 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useState, useEffect, useCallback, useContext } from 'react'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {
     useAnimatedStyle,
     useSharedValue,
     withSpring,
+    runOnJS,
   } from 'react-native-reanimated';
 import { useFonts } from 'expo-font'
+import { AttendanceModalContext } from '../lib/AttendanceModalState';
 
 
 
-export default function Card({ currentTime, handleSwipe}) {
-    const translateX = useSharedValue(0);
-
+export default function Card({ currentTime, handleSwipe, type}) {
+    const leftPosition = useSharedValue(-100);
     const context = useSharedValue({horizontal: 0})
+    const [modalState, setModalState] = useContext(AttendanceModalContext)
+
+    const updateShare = ()=>{
+        setModalState((prev)=> {
+            if(leftPosition.value > -40){
+                return true
+            }else{
+                return false
+            }
+        })
+    }    
+
+    const showModal = useCallback(() => {
+        "worklet";
+        runOnJS(updateShare)(0)
+      },
+      [])
+
     const gesture = Gesture.Pan()
     .onStart(() => {
-        context.value = { horizontal: translateX.value}
+        context.value = { horizontal: 0}
     })
     .onUpdate( event => {
-        translateX.value = event.translationX + context.value.horizontal
-        console.log(translateX.value)
+        leftPosition.value = event.translationX / 3 + context.value.horizontal
+        leftPosition.value = Math.min(leftPosition.value, 0)
+        showModal() 
+    })
+    .onEnd((_) => {
+        if (leftPosition.value > -40){
+            leftPosition.value = withSpring(0, {damping: 50})
+        }
+        else{
+            leftPosition.value = withSpring(-100, {damping: 50})
+        }
     })
     
-    useEffect(() => {
-        translateX.value = withSpring(0, {damping: 100})
-      }, [gesture])
-
 
     
     const animatedStyle = useAnimatedStyle(() => {
+        "worklet";
         return{
-            transform: [{translateX: translateX.value}, {translateY: -10}]
+            left: `${leftPosition.value}%`
         }
     }, [])
 
@@ -47,38 +72,30 @@ export default function Card({ currentTime, handleSwipe}) {
    
     
   return (
-    <View style={[styles.cardWrapper]} >
-        <View style={styles.card}>
+    <View style={[styles.card]}>
         <GestureDetector gesture={gesture}>
-            <View>
+            <View style={styles.cardContent}>
                 <Animated.View style={[ styles.shadow,animatedStyle]}>
                 </Animated.View>
                 <View style={[styles.shadowSlider]} />
-                    <Text style={styles.text}>Take Attendance</Text>
-                    {/* <Text style={styles.text}>{`${hours}:${minute}:${seconds}`}</Text> */}
-                    <Text style={styles.text}>current time in sconds</Text>
-                </View>
+                <Text style={styles.text}>{type == 'checkin' ?' Take Attendance' : 'Checkout for today'}</Text>
+                <Text style={styles.text}>current time in sconds</Text>
+            </View>
         </GestureDetector>
-        </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-    cardWrapper: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 20,
-    },
     card: {
-        // flex: 1,
         backgroundColor: 'white',
         width: '90%',
-        padding: 10,
-        shadowRadius: 30,
+        height: 70,
         borderRadius: 8,
         borderLeftColor: 'red',
         borderLeftWidth: 3,
+        marginBottom: 20,
+        shadowRadius: 30,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -89,26 +106,24 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         elevation: 1.2,
     },
+    cardContent:{
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+    },
     text: {
         fontFamily: 'RalewayBold',
         fontSize: 12,
+        paddingLeft: 10,
+        paddingBottom: 5
     },
     shadow: {
+        backgroundColor: '#387d7a11',
+        width: '100%',
+        height: '300%',
         position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '106%',
-        backgroundColor: '#59cd9022',
-        height: '160%',
-        borderRadius: 8,
-        transform: [
-            {translateY: -200},
-            {translateX: -13}
-        ]
+        left: '-100%'
     },
-    shadowSlider: {
-        backgroundColor: 'rgba(0, 255, 0, 0.1)',
-        flex: 1
-    }
+    
     
 })
