@@ -31,7 +31,7 @@ export default function AppStack() {
     leftPosition.value = Math.min(leftPosition.value, SCREEN_WIDTH)
   })
   .onEnd(() => {
-    if (leftPosition.value > SCREEN_WIDTH / 2){
+    if (leftPosition.value > SCREEN_WIDTH / 3){
       leftPosition.value = withSpring(SCREEN_WIDTH, {damping: 50})
     }
     else{
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     },
     navigationMenu: {
       position: 'absolute',
-      width: '100%',
+      width: '70%',
       height: '100%',
       top: 0,
       left: -SCREEN_WIDTH,

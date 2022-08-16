@@ -48,16 +48,17 @@ export default function ValidateAttendance() {
     }
 
     const currentTime = new Date().toLocaleString()
-    const date = () => {
-        var weekday=['Sunday', 'Monday', 'Teusday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    
+    const date = ( index = 0 ) => {
+        var weekday=['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-        const day = new Date().getDay() - 2;
+        const day = new Date().getDay() - index;
         if(day < 0){
             day = weekday.length() - day
         }
         console.log(weekday[day]);
         
-        return [weekday[day]]
+        return weekday[day]
     }
 
 
@@ -81,7 +82,7 @@ export default function ValidateAttendance() {
                 </View>
                 </View>
             </View>
-                <AttendanceModal twoDaysAgo = {date()[0]} />
+                <AttendanceModal twoDaysAgo = {date(2)} />
         </View>
   )
 }

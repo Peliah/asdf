@@ -107,7 +107,7 @@ const AttendanceModal = ({ twoDaysAgo }) => {
                             renderItem={({item}) => <Button text={item.day} onPress={() => getDayData(item.id)} color={item.color} />}
                         />
                     </View>
-                    <AttendanceDayStatus status={dayStatus()} />
+                    <AttendanceDayStatus status={getDayData()} />
                 </View>
         </Animated.View>
     </GestureDetector>
