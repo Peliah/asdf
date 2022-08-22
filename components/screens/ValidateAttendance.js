@@ -17,26 +17,26 @@ export default function ValidateAttendance() {
     const [user, setUser] = useState('')
     useEffect(() => {
       setUser(authData[0])
-      getSticker()
+    //   getSticker()
     }, [])
     
-    const getSticker = async() => {
-        try {
-        const response = await fetch('http://192.168.10.195:8000/randomsticker', 
-            {
-                headers: {
-                    Accept: 'application/json',
-                    Authorization: 'http',
-                    'Content-Type': 'application/json',
-                },
-            });
-            const data = await response.json();
-            console.log(data)
-        }
-        catch (err) {
-        console.log(err)
-        }
-    }
+    // const getSticker = async() => {
+    //     try {
+    //     const response = await fetch('http://192.168.10.195:8000/randomsticker', 
+    //         {
+    //             headers: {
+    //                 Accept: 'application/json',
+    //                 Authorization: 'http',
+    //                 'Content-Type': 'application/json',
+    //             },
+    //         });
+    //         const data = await response.json();
+    //         console.log(data)
+    //     }
+    //     catch (err) {
+    //     console.log(err)
+    //     }
+    // }
 
     const [loaded] = useFonts({
         Montserrat: require('../assets/fonts/static/Montserrat-Bold.ttf'),
@@ -50,11 +50,11 @@ export default function ValidateAttendance() {
     const currentTime = new Date().toLocaleString()
     
     const date = ( index = 0 ) => {
-        var weekday=['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        let weekday=['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-        const day = new Date().getDay() - index;
+        let day = new Date().getDay() - index;
         if(day < 0){
-            day = weekday.length() - day
+            day = weekday.length - day
         }
         console.log(weekday[day]);
         
@@ -69,12 +69,13 @@ export default function ValidateAttendance() {
             <View style={styles.header}>
                 <Text style={styles.title}>Welcome back</Text>
                 <Text style={styles.title}>{user.name}</Text>
-                <View style={styles.iconWrapper}>
+                {/* <View style={styles.iconWrapper}>
                     <Image style={{width: 100, height: 100}} source={require('../assets/img/hi.webp')} />
-                </View>
+                </View> */}
             </View>
             <View style={styles.footer}>
                 <Text style={styles.content}>{date()}</Text>
+                <Text style={styles.content}>{currentTime}</Text>
                 <View>
                 <View style={[styles.cardWrapper]} >
                     <Card currentTime={currentTime} type='checkin' />
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     header: {
-        height: '30%',
+        height: '20%',
         backgroundColor: '#1C4BB0'
     },
     iconWrapper: {
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
     cardWrapper: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20,
+        marginTop: '20%',
     },
 
     
