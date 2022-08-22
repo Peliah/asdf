@@ -10,7 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../lib/AuthContext';
 
 export default function Login({ navigation }) {
-    const [email, setEmail] = React.useState('')
+    const [email, setEmail] = React.useState('') 
     const [password, setPassword] = React.useState('')
     const [message, setMessage] = React.useState('')
     const [user, setUser] = useState(false)
@@ -30,7 +30,7 @@ export default function Login({ navigation }) {
         
             // axios POST request
         const options = {
-            url: 'http://192.168.43.102:5000/users/authenticate',
+            url: 'http://192.168.1.100:5000/users/authenticate',
             method: 'POST',
             headers: {
             'Accept': 'application/json',

@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         width: '100%',
-        paddingLeft: 10,
+        paddingLeft: 15,
+        paddingTop: 30,
     },
     contentItem: {
         flexDirection: 'row',

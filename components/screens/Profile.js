@@ -12,6 +12,7 @@ export default function Profile() {
     console.log(userdata);
   return (
     <View>
+      <Text>Profile</Text>
       <Text>{userdata.name}</Text>
       <Text>{userdata.email}</Text>
     </View>

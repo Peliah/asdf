@@ -67,9 +67,10 @@ const AttendanceModal = ({ twoDaysAgo }) => {
     }, [modalState])
 
     const getDayData = (id) => {
-        let day = new Date().toDateString()
+        let today = new Date()
+        let day = today.getFullYear()+ '-' + (today.getMonth() +1)+ '-' + (today.getDate()+ ' '+ today.getHours() + ':' +today.getMinutes()+':'+ today.getSeconds())//new Date().toDateString()
         if(id === 1){
-            day = new Date().toDateString()
+            day = today.getFullYear()+ '-' + (today.getMonth() +1)+ '-' + (today.getDate()+ ' '+ today.getHours() + ':' +today.getMinutes()+':'+ today.getSeconds())//Date.now().toString//new Date().toDateString()
         }
         if(id === 2){
             day = 'helo'

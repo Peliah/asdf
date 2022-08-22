@@ -29,9 +29,10 @@ export default function AppStack() {
   .onUpdate(event => {
     leftPosition.value = event.translationX + context.value.horizontal
     leftPosition.value = Math.min(leftPosition.value, SCREEN_WIDTH)
+    console.log(leftPosition)
   })
   .onEnd(() => {
-    if (leftPosition.value > SCREEN_WIDTH / 3){
+    if (leftPosition.value > SCREEN_WIDTH / 2){
       leftPosition.value = withSpring(SCREEN_WIDTH, {damping: 50})
     }
     else{

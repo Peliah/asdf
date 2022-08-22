@@ -79,7 +79,7 @@ export default function Card({ currentTime, handleSwipe, type}) {
                 </Animated.View>
                 <View style={[styles.shadowSlider]} />
                 <Text style={styles.text}>{type == 'checkin' ?' Take Attendance' : 'Checkout for today'}</Text>
-                <Text style={styles.text}>current time in sconds</Text>
+                <Text style={styles.text}>current time in seconds</Text>
             </View>
         </GestureDetector>
     </View>

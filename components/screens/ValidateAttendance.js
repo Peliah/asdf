@@ -68,7 +68,7 @@ export default function ValidateAttendance() {
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.title}>Welcome back</Text>
-                {/* <Text style={styles.title}>{user.name}</Text> */}
+                <Text style={styles.title}>{user.name}</Text>
                 <View style={styles.iconWrapper}>
                     <Image style={{width: 100, height: 100}} source={require('../assets/img/hi.webp')} />
                 </View>
@@ -78,7 +78,7 @@ export default function ValidateAttendance() {
                 <View>
                 <View style={[styles.cardWrapper]} >
                     <Card currentTime={currentTime} type='checkin' />
-                    {/* <Card currentTime={currentTime} handleSwipe={swipe} type='checkout' /> */}
+                    <Card currentTime={currentTime}  type='checkout' />
                 </View>
                 </View>
             </View>
