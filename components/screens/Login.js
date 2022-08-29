@@ -106,7 +106,7 @@ export default function Login({ navigation }) {
 
         <View style={styles.loginIssueWrapper}>
             <Text style={styles.loginIssueMainText} >Have an issue with your account?</Text>
-            <TouchableOpacity onPress={() => setAuthData("New Value")}><Text style={[styles.loginIssueButton]}>Contact admin</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => {handleContactAdmin()}}><Text style={[styles.loginIssueButton]}>Contact admin</Text></TouchableOpacity>
         </View>
       </View>
   )

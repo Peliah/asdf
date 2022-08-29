@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 import { StyleSheet,SafeAreaView, Text, Platform, } from 'react-native';
 import { enableScreens } from 'react-native-screens'
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from 'react-native-screens/native-stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import 'react-native-gesture-handler';
 
 
@@ -23,9 +23,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <AuthContextProvider>
-        <NavigationContainer>
           { connected ? <Auth /> : <PopupNetwork /> }
-        </NavigationContainer>
       </AuthContextProvider>
     </SafeAreaView>
   );

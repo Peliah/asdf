@@ -13,9 +13,12 @@ export default function AuthStack() {
 
   return (
     <View style={styles.container}>
+        <NavigationContainer>
+
         <Stack.Navigator>
             <Stack.Screen name="login_section" options={ { headerShown: false} } component={Login} />
         </Stack.Navigator>
+        </NavigationContainer>
     </View>
   )
 }

@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     settingContent: {
-        padding: 20
+        padding: 20,
+        backgroundColor:'red'
     },
     text: {
         fontFamily: 'RalewayBold'

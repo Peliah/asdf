@@ -1,8 +1,8 @@
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { enableScreens } from 'react-native-screens'
-import { createNativeStackNavigator } from 'react-native-screens/native-stack'
-
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NavigationContainer, TabActions } from '@react-navigation/native';
 import ValidateAttendance from '../ValidateAttendance';
 import HomeScreen from '../HomeScreen';
 import { Gesture, GestureDetector, GestureHandlerRootView, } from 'react-native-gesture-handler';
@@ -10,8 +10,8 @@ import Menu from '../Menu';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import Settings from '../Settings';
 import Profile from '../Profile';
-
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import BottonNav from '../BottonNav'
 enableScreens();
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window')
@@ -47,6 +47,8 @@ export default function AppStack() {
     }
   }, [])
 
+  const Tab = createBottomTabNavigator();
+
   // TODO: add something
   return (
     <View style= {styles.container}>
@@ -58,12 +60,21 @@ export default function AppStack() {
               <Menu />
             </Animated.View>
             <View style={{flex: 1}}>
+              <NavigationContainer>
                 <Stack.Navigator>
-                  <Stack.Screen name="home"  options={ { headerShown: false} } component={HomeScreen} />
-                  {/* <Stack.Screen name="settings"  options={ { headerShown: false} } component={Settings} /> */}
 
-                  {/* <Stack.Screen name="profile"  options={ { headerShown: false} } component={Profile} /> */}
+                  <Stack.Screen name='Tab'  options={ { headerShown: false} }  component={BottonNav}/>
+                  <Stack.Screen name="home"  options={ { headerShown: false} } component={HomeScreen} />
+                  <Stack.Screen name="settings"  options={ { headerShown: false} } component={Settings} />
+
+                  <Stack.Screen name="profile"  options={ { headerShown: false} } component={Profile} />
                 </Stack.Navigator>
+                {/* <Tab.Navigator>
+                  <Tab.Screen name='home' options={{ headerShown: false }} component={HomeScreen}/>
+                  <Tab.Screen name='settings' component={Settings}/>
+                  <Tab.Screen name= 'profile' component={Profile}/>
+                </Tab.Navigator> */}
+              </NavigationContainer>
             </View>
           </View>
         </GestureDetector>

@@ -9,6 +9,7 @@ import axios from 'axios';
 import AttendanceModal from './AttendanceModal';
 import Card from './Card';
 import { AttendanceModalContext } from '../lib/AttendanceModalState';
+import Clock from './Clock'
 
 export default function ValidateAttendance() {
 
@@ -18,6 +19,7 @@ export default function ValidateAttendance() {
     useEffect(() => {
       setUser(authData[0])
     //   getSticker()
+        
     }, [])
     
     // const getSticker = async() => {
@@ -61,7 +63,7 @@ export default function ValidateAttendance() {
         return weekday[day]
     }
 
-
+  
 
 
   return (
@@ -74,16 +76,17 @@ export default function ValidateAttendance() {
                 </View> */}
             </View>
             <View style={styles.footer}>
-                <Text style={styles.content}>{date()}</Text>
-                <Text style={styles.content}>{currentTime}</Text>
+                <Text style={styles.content}>{date() +" "}
+                <Clock/>
+                </Text>
                 <View>
                 <View style={[styles.cardWrapper]} >
                     <Card currentTime={currentTime} type='checkin' />
-                    <Card currentTime={currentTime}  type='checkout' />
+                    {/* <Card currentTime={currentTime}  type='checkout' /> */}
                 </View>
                 </View>
             </View>
-                <AttendanceModal twoDaysAgo = {date(2)} />
+                {/* <AttendanceModal twoDaysAgo = {date(2)} /> */}
         </View>
   )
 }
@@ -91,6 +94,7 @@ export default function ValidateAttendance() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        overflow:'hidden'
     },
     title: {
         fontSize: 20,
@@ -101,7 +105,10 @@ const styles = StyleSheet.create({
     },
     header: {
         height: '20%',
-        backgroundColor: '#1C4BB0'
+        backgroundColor: '#1C4BB0',
+        borderBottomEndRadius:10,
+        borderBottomStartRadius:10,
+
     },
     iconWrapper: {
         marginTop: 20,
@@ -116,6 +123,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: '20%',
     },
+    footer:{
+        height:'100%'
+    }
 
     
 })
