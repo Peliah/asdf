@@ -30,7 +30,7 @@ export default function Login({ navigation }) {
         
             // axios POST request
         const options = {
-            url: 'http://192.168.1.100:5000/users/authenticate',
+            url: 'http://192.168.1.101:500/users/authenticate',
             method: 'POST',
             headers: {
             'Accept': 'application/json',

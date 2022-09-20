@@ -61,12 +61,8 @@ const BottonNav = () => {
 const styles =StyleSheet.create({
   tabBar:{
     position:'absolute',
-    paddingBottom: 10,
+    // paddingBottom: 10,
     height:70,
-    left:16,
-    right:16,
-    bottom:16,
-    borderRadius:25,
     borderTopColor: 'transparent',
     shadowColor: '#001',
     shadowOffset:{

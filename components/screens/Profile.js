@@ -29,12 +29,10 @@ if (!loaded) {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           <View style={styles.backgrnd}>
-            <Text>Profile</Text>
+            {/* <Text>Profile</Text> */}
           </View>
           <View style={styles.imgBack}>
-            <Image style={styles.profilePic} source={require('../assets/img/hi.webp')} />
-
-            {/* <Image source={require()} style={styles.profilePic}></Image> */}
+            <Image style={styles.profilePic} source={{uri: 'data:image/png;base64,'+userdata.image}}/>
           </View>
           <View>
             <Text style={styles.username}>{userdata.name}</Text>
@@ -53,9 +51,7 @@ if (!loaded) {
               <Text style={styles.btnText}>{userdata.function}</Text>
               <Text style={styles.label}>Function</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.content} onPress={() => {console.log("Logout")}}>
-              <Text style={styles.btnText}>Logout</Text>
-            </TouchableOpacity>
+           
           </View>
         </View>
       </ScrollView>
@@ -72,17 +68,17 @@ const styles = StyleSheet.create({
   },
   imgBack:{
     marginTop:-100,
+    width:201,
+    height:201,
     backgroundColor: '#9B9BB9',
     borderRadius:100,
-    width:200,
-    height:200,
     alignSelf:'center',
     justifyContent:'center'
 
   },
   profilePic:{
-    width:140,
-    height: 140,
+    width:200,
+    height:200,
     borderRadius:100,
     alignSelf:'center',
   },
@@ -96,7 +92,8 @@ const styles = StyleSheet.create({
     fontSize:15,
     fontWeight: 'bold',
     fontFamily:'RalewayBold',
-    color: 'grey'
+    color: 'grey',
+    paddingLeft:10
   },
   content:{
     alignSelf: 'center',
