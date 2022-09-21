@@ -10,7 +10,9 @@ export default function Profile() {
     useEffect(() => {
       setUserdata(authData[0])
     }, [])
-    
+    const logout = () => {
+        setAuthData(false)
+    }
     console.log(userdata);
 
     const hi = () => {
@@ -48,7 +50,7 @@ if (!loaded) {
               <Text style={styles.btnText}>{userdata.phone}</Text>
               <Text style={styles.label}>Phone</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.content} onPress={() => {console.log("logout")}}>
+            <TouchableOpacity style={styles.content} onPress={() => {logout()}}>
               <Text style={styles.label}>Logout</Text>
             </TouchableOpacity>
            

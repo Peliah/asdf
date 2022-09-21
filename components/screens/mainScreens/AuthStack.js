@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, {useContext} from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { enableScreens } from 'react-native-screens'
-import { createNativeStackNavigator } from 'react-native-screens/native-stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import Login from '../Login';
 import { AuthContext } from '../../lib/AuthContext';
