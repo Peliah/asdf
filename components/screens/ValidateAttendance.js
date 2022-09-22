@@ -17,7 +17,7 @@ export default function ValidateAttendance() {
     const [modalState, setModalState] = useContext(AttendanceModalContext)
     const [user, setUser] = useState('')
     useEffect(() => {
-      setUser(authData[0])
+      setUser(authData[0][0])
     //   getSticker()
         
     }, [])

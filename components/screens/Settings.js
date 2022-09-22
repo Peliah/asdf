@@ -8,7 +8,7 @@ export default function Profile() {
     const [authData, setAuthData] = useContext(AuthContext)
     const [userdata, setUserdata] = useState('')
     useEffect(() => {
-      setUserdata(authData[0])
+      setUserdata(authData[0][0])
     }, [])
     const logout = () => {
         setAuthData(false)

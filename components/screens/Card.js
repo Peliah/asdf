@@ -76,7 +76,7 @@ export default function Card({ currentTime, handleSwipe, type}) {
     const [timeOut, settimeOut] = useState('__:__')
     const checkin =()=>{
 
-        fetch('http://192.168.1.100:5000/hr/attendance/checkin',
+        fetch('http://192.168.1.101:500/hr/attendance/checkin',
         {
          method:'POST',
          headers:{
@@ -94,7 +94,7 @@ export default function Card({ currentTime, handleSwipe, type}) {
     }
 
     const checkout = ()=>{
-        fetch('http://192.168.1.100:5000/hr/attendance/checkout',
+        fetch('http://192.168.1.101:500/hr/attendance/checkout',
         {
          method:'PUT',
          headers:{
@@ -102,11 +102,11 @@ export default function Card({ currentTime, handleSwipe, type}) {
            'Content-Type': 'application/json'
          },
      
-         body: JSON.stringify({
-           // name:userdata.name,
-           id: '',
-           checkin:HMS
-         })
+        //  body: JSON.stringify({
+        //    // name:userdata.name,
+        //   //  id: '',
+        //   //  checkin:HMS
+        //  })
        });
 
        settimeOut(HMS)
