@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity, Alert } from 'react-native'
 import React, { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../lib/AuthContext'
 import { useFonts } from 'expo-font'
@@ -7,12 +7,35 @@ import { useFonts } from 'expo-font'
 export default function Profile() {
     const [authData, setAuthData] = useContext(AuthContext)
     const [userdata, setUserdata] = useState('')
+    const [showBox, setShowBox] = useState(false);
     useEffect(() => {
       setUserdata(authData[0][0])
     }, [])
+
     const logout = () => {
-        setAuthData(false)
+      setShowBox(true);
+
+        return Alert.alert(
+          "Are your sure?",
+          "You are exiting this application, press Yes to proceed or No to cancel",
+          [
+            // The "Yes" button
+            {
+              text: "Yes",
+              onPress: () => {
+                setAuthData(false)
+              },
+            },
+            // The "No" button
+            // Does nothing but dismiss the dialog when tapped
+            {
+              text: "No",
+            },
+          ]
+        );
+
     }
+
     console.log(userdata);
 
     const hi = () => {

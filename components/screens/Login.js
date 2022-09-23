@@ -1,4 +1,4 @@
-import { StyleSheet, Image, Text, View, TextInput, Button, TouchableOpacity } from 'react-native'
+import { StyleSheet, Image, Text, View, TextInput, ActivityIndicator, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect, useContext } from 'react'
 import { useFonts } from 'expo-font';
 import { FontAwesome, Octicons } from '@expo/vector-icons';
@@ -15,6 +15,7 @@ export default function Login({ navigation }) {
     const [message, setMessage] = React.useState('')
     const [user, setUser] = useState(false)
     const [authData, setAuthData] = useContext( AuthContext )
+    const [anime, setAnime] = useState(false)
     const [loaded] = useFonts({
         Montserrat: require('../assets/fonts/Montserrat.ttf'),
         RalewayBold: require('../assets/fonts/Raleway-Bold.ttf'),
@@ -47,10 +48,19 @@ export default function Login({ navigation }) {
             data = response.data
             setUser(data)
             setAuthData(data)
+            if (authData===false){
+                setMessage('Invalid username/password field')
+                setTimeout(()=>{
+                    setMessage('')
+                }, 2000)
+                setAnime(false)
+            }
         })
         .catch(err => {
             console.log(err)
         })
+
+        
 
     }
   
@@ -70,6 +80,14 @@ export default function Login({ navigation }) {
         }
 
         login(email, password)
+        setAnime(true)
+        // if (authData===false){
+        //     setMessage('Invalid username/password field')
+        //     setTimeout(()=>{
+        //         setMessage('')
+        //     }, 2000)
+        //     setAnime(false)
+        // }
     }
 
 
@@ -95,6 +113,8 @@ export default function Login({ navigation }) {
                 style={styles.input}
             />
         </View>
+
+        
         <View style={{marginTop: -10}}>
             <Text style={styles.danger}>{message}</Text>
         </View>
@@ -108,6 +128,7 @@ export default function Login({ navigation }) {
             <Text style={styles.loginIssueMainText} >Have an issue with your account?</Text>
             <TouchableOpacity onPress={() => {handleContactAdmin()}}><Text style={[styles.loginIssueButton]}>Contact admin</Text></TouchableOpacity>
         </View>
+        <ActivityIndicator animating = {anime} size="large"/>
       </View>
   )
 }

@@ -24,7 +24,6 @@ const Chart = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Chart</Text>
       <BarChart data={graphData} 
 
         barBorderRadius={6}
@@ -57,6 +56,8 @@ export default Chart
 
 const styles = StyleSheet.create({
   container:{
+    marginTop:10,
+    paddingTop:20,
     flex:1,
     alignItems:'center',
   }

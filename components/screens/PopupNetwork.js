@@ -32,8 +32,8 @@ export default function PopupNetwork({ visible }) {
         const n = await Network.getIpAddressAsync()
         console.log(n)
     }
-    // checkConnected();
-    // console.log(WifiManager.connectionStatus())
+    checkConnected();
+    console.log(WifiManager.connectionStatus())
 
 
     
@@ -48,7 +48,7 @@ export default function PopupNetwork({ visible }) {
                     <Text style={styles.title}>Grant Access</Text>
                 </View>
                 <View style={styles.mainTextContainer}>
-                <Text style={styles.mainText}>Wise needs network permissions to help you connect to the system. Connnect to wise wifi to be able access features with mobile </Text>
+                <Text style={styles.mainText}>Wise needs network permissions to help you connect to the system. Connnect to wise wifi to be able access features within mobile </Text>
                 </View>
                 <View style = {styles.buttonWrapper}>
                     <TouchableOpacity style={[styles.button, styles.connect]}
