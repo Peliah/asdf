@@ -14,9 +14,7 @@ const Graph = () => {
 
   return (
     <View style={styles.graph}>
-      <Table>
-        <Rows data={data.}/>
-      </Table>
+      
     </View>
   )
 }
