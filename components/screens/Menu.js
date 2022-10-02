@@ -22,7 +22,7 @@ export default function Menu({ navigation }) {
         return null;
     }
     const openSettings = () => {
-        console.log('settings page');
+        // console.log('settings page');
     } 
     const logout = () => {
         setAuthData(false)
